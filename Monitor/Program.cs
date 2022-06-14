@@ -92,6 +92,10 @@ namespace MonitorTest
                     {
                         // Some Exception Outside the Lock
                     }
+                    finally
+                    {
+                        // DO NOT try Exit the Monitor Here like in the Documentation Example
+                    }
                 }
             }).ConfigureAwait(false);
 
@@ -141,6 +145,10 @@ namespace MonitorTest
                     catch
                     {
                         // Some Exception Outside the Lock
+                    }
+                    finally
+                    {
+                        // DO NOT try Exit the Monitor Here like in the Documentation Example
                     }
                 }
             }).ConfigureAwait(false);
