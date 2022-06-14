@@ -91,7 +91,7 @@ namespace MonitorTest
                     }
                     catch
                     {
-                        // Some Exception Outside the Lock
+                        // Some Exception Outside the Critical Section
                     }
                     finally
                     {
@@ -146,7 +146,7 @@ namespace MonitorTest
                     }
                     catch
                     {
-                        // Some Exception Outside the Lock
+                        // Some Exception Outside the Critical Section
                     }
                     finally
                     {
