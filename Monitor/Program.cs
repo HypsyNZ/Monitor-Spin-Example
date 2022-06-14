@@ -45,6 +45,7 @@ namespace MonitorTest
 
         private static async void StaticAsyncMain()
         {
+            // Task One
             _ = Task.Run(async () =>
             {
                 while (true)
@@ -62,7 +63,7 @@ namespace MonitorTest
                                 int i = 0;
                                 while (true)
                                 {
-                                    Console.WriteLine(i + "| Blocking2");
+                                    Console.WriteLine(i + "| Blocking Task Two");
                                     i++;
 
                                     if (i == 100)
@@ -94,6 +95,7 @@ namespace MonitorTest
                 }
             }).ConfigureAwait(false);
 
+            // Task Two
             await Task.Run(async () =>
             {
                 while (true)
@@ -111,7 +113,7 @@ namespace MonitorTest
                                 int i = 0;
                                 while (true)
                                 {
-                                    Console.WriteLine(i + "| Blocking1");
+                                    Console.WriteLine(i + "| Blocking Task One");
                                     i++;
 
                                     if (i == 100)
