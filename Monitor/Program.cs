@@ -1,4 +1,4 @@
-﻿/*
+/*
 *MIT License
 *
 *Copyright (c) 2022 S Christison
@@ -55,6 +55,8 @@ namespace MonitorTest
                         lockTaken = Monitor.TryEnter(lockObj);
                         if (lockTaken)
                         {
+                            // Critical Section Starts
+
                             try
                             {
                                 int i = 0;
@@ -77,14 +79,17 @@ namespace MonitorTest
                             {
                                 Monitor.Exit(lockObj);
                             }
+
+                            // Critical Section Ends
                         }
                         else
                         {
-                            // The lock was not acquired.
+                            // Avoided Critical Section Carry On
                         }
                     }
                     catch
                     {
+                        // Some Exception Outside the Lock
                     }
                 }
             }).ConfigureAwait(false);
@@ -99,6 +104,8 @@ namespace MonitorTest
                         lockTaken = Monitor.TryEnter(lockObj);
                         if (lockTaken)
                         {
+                            // Critical Section Starts
+
                             try
                             {
                                 int i = 0;
@@ -121,14 +128,17 @@ namespace MonitorTest
                             {
                                 Monitor.Exit(lockObj);
                             }
+
+                            // Critical Section Ends
                         }
                         else
                         {
-                            // The lock was not acquired.
+                            // Avoided Critical Section Carry On
                         }
                     }
                     catch
                     {
+                        // Some Exception Outside the Lock
                     }
                 }
             }).ConfigureAwait(false);
