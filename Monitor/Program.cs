@@ -75,6 +75,7 @@ namespace MonitorTest
                             }
                             catch
                             {
+                                // Exception Inside Critical Section
                             }
                             finally
                             {
@@ -129,6 +130,7 @@ namespace MonitorTest
                             }
                             catch
                             {
+                                // Exception Inside Critical Section
                             }
                             finally
                             {
