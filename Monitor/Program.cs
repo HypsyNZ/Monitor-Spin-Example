@@ -86,7 +86,7 @@ namespace MonitorTest
                         }
                         else
                         {
-                            // Avoided Critical Section Carry On
+                            // Avoided Critical Section Continue Normal Execution
                         }
                     }
                     catch
@@ -141,7 +141,7 @@ namespace MonitorTest
                         }
                         else
                         {
-                            // Avoided Critical Section Carry On
+                            // Avoided Critical Section Continue Normal Execution
                         }
                     }
                     catch
