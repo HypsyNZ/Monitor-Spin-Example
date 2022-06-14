@@ -22,6 +22,7 @@ namespace MonitorTest
 
         private static async void StaticAsyncMain()
         {
+            // Task One
             _ = Task.Run(async () =>
             {
                 while (true)
@@ -36,21 +37,22 @@ namespace MonitorTest
 
                             try
                             {
-                                int i = 0;
+                                int inside = 0;
                                 while (true)
                                 {
-                                    Console.WriteLine(i + "| Blocking2");
-                                    i++;
+                                    Console.WriteLine(inside + "| Blocking Task Two");
+                                    inside++;
 
-                                    if (i == 100)
+                                    if (inside == 100)
                                     {
-                                        i = 0;
+                                        inside = 0;
                                         break;
                                     }
                                 }
                             }
                             catch
                             {
+                                // Exception Inside Critical Section
                             }
                             finally
                             {
@@ -61,18 +63,24 @@ namespace MonitorTest
                         }
                         else
                         {
-                            // Avoided Critical Section Carry On
+                            // Avoided Critical Section Continue Normal Execution
                         }
                     }
                     catch
                     {
-                        // Some Exception Outside the Lock
+                        // Some Exception Outside the Critical Section
+                    }
+                    finally
+                    {
+                        // DO NOT try Exit the Monitor Here like in the Documentation Example
                     }
                 }
             }).ConfigureAwait(false);
 
+            // Task Two
             await Task.Run(async () =>
             {
+                int outside = 0;
                 while (true)
                 {
                     await Task.Delay(1).ConfigureAwait(false);
@@ -85,21 +93,21 @@ namespace MonitorTest
 
                             try
                             {
-                                int i = 0;
                                 while (true)
                                 {
-                                    Console.WriteLine(i + "| Blocking1");
-                                    i++;
+                                    Console.WriteLine(outside + "| Blocking Task One");
+                                    outside++;
 
-                                    if (i == 100)
+                                    if (outside == 100)
                                     {
-                                        i = 0;
+                                        outside = 0;
                                         break;
                                     }
                                 }
                             }
                             catch
                             {
+                                // Exception Inside Critical Section
                             }
                             finally
                             {
@@ -110,12 +118,16 @@ namespace MonitorTest
                         }
                         else
                         {
-                            // Avoided Critical Section Carry On
+                            // Avoided Critical Section Continue Normal Execution
                         }
                     }
                     catch
                     {
-                        // Some Exception Outside the Lock
+                        // Some Exception Outside the Critical Section
+                    }
+                    finally
+                    {
+                        // DO NOT try Exit the Monitor Here like in the Documentation Example
                     }
                 }
             }).ConfigureAwait(false);
