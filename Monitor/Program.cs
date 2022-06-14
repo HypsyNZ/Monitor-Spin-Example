@@ -60,15 +60,15 @@ namespace MonitorTest
 
                             try
                             {
-                                int inside = 0;
+                                int safeInside = 0;
                                 while (true)
                                 {
-                                    Console.WriteLine(inside + "| Blocking Task Two");
-                                    inside++;
+                                    Console.WriteLine(safeInside + "| Blocking Task Two");
+                                    safeInside++;
 
-                                    if (inside == 100)
+                                    if (safeInside == 100)
                                     {
-                                        inside = 0;
+                                        safeInside = 0;
                                         break;
                                     }
                                 }
@@ -103,7 +103,7 @@ namespace MonitorTest
             // Task Two
             await Task.Run(async () =>
             {
-                int outside = 0;
+                int dangerOutside = 0;
                 while (true)
                 {
                     await Task.Delay(1).ConfigureAwait(false);
@@ -118,12 +118,12 @@ namespace MonitorTest
                             {
                                 while (true)
                                 {
-                                    Console.WriteLine(outside + "| Blocking Task One");
-                                    outside++;
+                                    Console.WriteLine(dangerOutside + "| Blocking Task One");
+                                    dangerOutside++;
 
-                                    if (outside == 100)
+                                    if (dangerOutside == 100)
                                     {
-                                        outside = 0;
+                                        dangerOutside = 0;
                                         break;
                                     }
                                 }
